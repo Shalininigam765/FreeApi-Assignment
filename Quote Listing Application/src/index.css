@@ -1,0 +1,198 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Georgia', serif;
+  min-height: 100vh;
+  background-color: #f5f0eb;
+  color: #4a3f38;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark {
+  background-color: #1a1714;
+  color: #d4c9be;
+}
+
+/* ── Layout ── */
+.quote-gallery {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+
+/* ── Header ── */
+.gallery-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.gallery-header h1 {
+  font-size: 2.4rem;
+  font-weight: 400;
+  color: #5c4a3a;
+  letter-spacing: 0.04em;
+  transition: color 0.3s ease;
+}
+
+body.dark .gallery-header h1 {
+  color: #c9b8a8;
+}
+
+.gallery-header p {
+  margin-top: 8px;
+  color: #9c8878;
+  font-size: 1rem;
+  font-style: italic;
+  transition: color 0.3s ease;
+}
+
+body.dark .gallery-header p {
+  color: #7a6a5e;
+}
+
+/* ── Toggle button ── */
+.theme-toggle {
+  margin-top: 16px;
+  padding: 6px 16px;
+  border: 1px solid #e8ddd4;
+  border-radius: 20px;
+  background: #e8ddd4;
+  color: #5c4a3a;
+  font-size: 0.8rem;
+  font-family: sans-serif;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background: #ddd0c4;
+}
+
+body.dark .theme-toggle {
+  background: #2e2824;
+  border-color: #3a3330;
+  color: #c9b8a8;
+}
+
+body.dark .theme-toggle:hover {
+  background: #3a3330;
+}
+
+/* ── Grid ── */
+.quotes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+/* ── Card ── */
+.quote-card {
+  background: #fffdf9;
+  border: 1px solid #e8ddd4;
+  border-radius: 16px;
+  padding: 28px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease, border-color 0.3s ease;
+  cursor: default;
+  animation: fadeInUp 0.4s ease both;
+}
+
+.quote-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(92, 74, 58, 0.1);
+}
+
+body.dark .quote-card {
+  background: #242019;
+  border-color: #3a3330;
+}
+
+body.dark .quote-card:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+.quote-mark {
+  font-size: 3.5rem;
+  line-height: 1;
+  color: #c9b8a8;
+  font-family: Georgia, serif;
+  user-select: none;
+  transition: color 0.3s ease;
+}
+
+body.dark .quote-mark {
+  color: #5a4e46;
+}
+
+.quote-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #4a3f38;
+  flex: 1;
+  transition: color 0.3s ease;
+}
+
+body.dark .quote-text {
+  color: #d4c9be;
+}
+
+.quote-author {
+  font-size: 0.9rem;
+  color: #8a7060;
+  font-style: italic;
+  border-top: 1px solid #ede5dc;
+  padding-top: 12px;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark .quote-author {
+  color: #8a7a6e;
+  border-top-color: #3a3330;
+}
+
+/* ── Tags ── */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  background: #f0e8e0;
+  color: #7a6050;
+  font-size: 0.72rem;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-family: sans-serif;
+  letter-spacing: 0.03em;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+body.dark .tag {
+  background: #2e2824;
+  color: #9a8878;
+}
+
+/* ── Status ── */
+.status-message {
+  text-align: center;
+  padding: 80px 0;
+  color: #9c8878;
+  font-size: 1.1rem;
+  font-style: italic;
+}
+
+.error-message {
+  text-align: center;
+  padding: 80px 0;
+  color: #b05a5a;
+  font-size: 1rem;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
