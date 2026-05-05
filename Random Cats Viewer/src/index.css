@@ -1,0 +1,120 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #141414;
+  font-family: 'Segoe UI', sans-serif;
+  color: #e8e3de;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding: 24px;
+}
+
+h1 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #e8e3de;
+  letter-spacing: 0.3px;
+}
+
+/* Card */
+.card {
+  width: 360px;
+  background: #1e1e1e;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card img {
+  width: 100%;
+  height: 260px;
+  padding: 2px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.card:hover img { transform: scale(1.03); }
+
+/* Info */
+.info {
+  padding: 20px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+}
+
+.info h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #e8e3de;
+}
+
+.info p {
+  font-size: 0.875rem;
+  color: #9e9890;
+  line-height: 1.65;
+}
+
+/* Skeleton */
+.skeleton {
+  width: 100%;
+  height: 380px;
+  background: linear-gradient(90deg, #1e1e1e 25%, #2a2a2a 50%, #1e1e1e 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Button */
+.btn {
+  padding: 12px 32px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 1.5px solid #3a3a3a;
+  border-radius: 50px;
+  cursor: pointer;
+  background: #1e1e1e;
+  color: #e8e3de;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn:hover:not(:disabled) {
+  background: #2a2a2a;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  transform: translateY(-1px);
+}
+
+.btn:active:not(:disabled) { transform: scale(0.97); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* Error */
+.error {
+  padding: 24px;
+  font-size: 0.9rem;
+  color: #e07070;
+  text-align: center;
+}
