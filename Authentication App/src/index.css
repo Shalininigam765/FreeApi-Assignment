@@ -1,0 +1,397 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+}
+
+/* ══════════════════════════════
+   PICTORIAL BACKGROUND
+══════════════════════════════ */
+.app-bg {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+
+  /* Rich mountain + sky scene using layered SVG + gradients */
+  background-color: #0a0e1a;
+  background-image:
+    /* Stars */
+    radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 8%,  rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 20%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 5%,  rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 12%, rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 18%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 92% 7%,  rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 15% 30%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 25%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 78% 30%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    /* Aurora glow bands */
+    radial-gradient(ellipse 80% 40% at 20% 50%, rgba(99, 179, 237, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 30% at 80% 40%, rgba(154, 117, 234, 0.1) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 25% at 50% 60%, rgba(72, 187, 120, 0.07) 0%, transparent 70%),
+    /* Sky gradient */
+    linear-gradient(180deg,
+      #020510 0%,
+      #0a1628 25%,
+      #0d1f3c 45%,
+      #1a2a4a 60%,
+      #1e3a5f 72%,
+      #2d4a6e 80%,
+      #3d5a7e 88%,
+      #4a6a8e 100%
+    );
+}
+
+/* SVG mountain silhouette via clip-path pseudo element */
+.app-bg::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  background: linear-gradient(180deg, #0d1117 0%, #161b22 60%, #1c2128 100%);
+  clip-path: polygon(
+    0% 100%,
+    0% 70%,
+    5% 55%,
+    10% 65%,
+    15% 40%,
+    20% 55%,
+    25% 30%,
+    30% 50%,
+    35% 20%,
+    40% 45%,
+    45% 15%,
+    50% 40%,
+    55% 18%,
+    60% 42%,
+    65% 25%,
+    70% 48%,
+    75% 32%,
+    80% 52%,
+    85% 38%,
+    90% 58%,
+    95% 45%,
+    100% 60%,
+    100% 100%
+  );
+  z-index: 0;
+}
+
+/* Snow caps on mountains */
+.app-bg::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  background: rgba(200, 220, 255, 0.06);
+  clip-path: polygon(
+    24% 100%,
+    25% 30%,
+    26% 100%,
+    34% 100%,
+    35% 20%,
+    36% 100%,
+    44% 100%,
+    45% 15%,
+    46% 100%,
+    54% 100%,
+    55% 18%,
+    56% 100%,
+    64% 100%,
+    65% 25%,
+    66% 100%
+  );
+  z-index: 0;
+}
+
+/* Overlay for readability */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 10, 20, 0.45);
+  z-index: 1;
+}
+
+/* Floating orbs */
+.app-center {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 460px;
+}
+
+.app-center::before,
+.app-center::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app-center::before {
+  width: 350px;
+  height: 350px;
+  background: rgba(99, 102, 241, 0.15);
+  top: 10%;
+  left: 5%;
+  animation: drift 18s ease-in-out infinite;
+}
+
+.app-center::after {
+  width: 280px;
+  height: 280px;
+  background: rgba(16, 185, 129, 0.1);
+  bottom: 10%;
+  right: 5%;
+  animation: drift 22s ease-in-out infinite reverse;
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0); }
+  33%       { transform: translate(40px, -30px); }
+  66%       { transform: translate(-20px, 40px); }
+}
+
+/* ══════════════════════════════
+   FORM CARD
+══════════════════════════════ */
+.form-card {
+  background: rgba(15, 20, 35, 0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 44px 40px;
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Form Header ── */
+.form-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.form-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+  animation: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+}
+
+@keyframes pop {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.form-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+}
+
+.form-subtitle {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.form-subtitle strong {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ── Inputs ── */
+.form-body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-group label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.input-group input {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 13px 16px;
+  color: #fff;
+  font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.input-group input::placeholder { color: rgba(255,255,255,0.2); }
+
+.input-group input:focus {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(99, 102, 241, 0.7);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+
+/* ── Primary Button ── */
+.btn-primary {
+  margin-top: 6px;
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(99, 102, 241, 0.5); }
+.btn-primary:hover::before { opacity: 1; }
+.btn-primary:active { transform: translateY(0) scale(0.98); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* ── Logout Button ── */
+.btn-logout {
+  margin-top: 28px;
+  width: 100%;
+  padding: 13px;
+  background: transparent;
+  color: #f87171;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  border: 1px solid rgba(248, 113, 113, 0.35);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+  background: rgba(248, 113, 113, 0.1);
+  border-color: rgba(248, 113, 113, 0.6);
+  box-shadow: 0 0 20px rgba(248, 113, 113, 0.15);
+}
+
+/* ── Spinner ── */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Error Box ── */
+.error-box {
+  background: rgba(248, 113, 113, 0.1);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  border-left: 3px solid #f87171;
+  border-radius: 10px;
+  padding: 11px 14px;
+  color: #fca5a5;
+  font-size: 13.5px;
+  margin-bottom: 20px;
+}
+
+/* ── Switch link ── */
+.form-switch {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.form-switch span {
+  color: #818cf8;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.form-switch span:hover { color: #a5b4fc; text-decoration: underline; }
+
+/* ── Dashboard card extras ── */
+.dashboard-card { text-align: center; }
+
+.user-info {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.user-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.user-row span { color: rgba(255,255,255,0.4); }
+.user-row strong { color: #fff; }
+
+/* ── Responsive ── */
+@media (max-width: 500px) {
+  .form-card { padding: 32px 24px; border-radius: 20px; }
+  .form-header h2 { font-size: 24px; }
+}
