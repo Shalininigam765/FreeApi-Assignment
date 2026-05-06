@@ -1,0 +1,98 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #2c3e50, #4ca1af);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: #f0f4f8;
+}
+
+.title {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  letter-spacing: 0.05em;
+  color: #e0f7fa;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+.status {
+  text-align: center;
+  padding: 1rem;
+  opacity: 0.7;
+}
+
+.status.error { color: #ff8a80; }
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.25rem;
+  padding: 1.5rem clamp(1rem, 5vw, 3rem) 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.user-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  text-align: center;
+}
+
+.user-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 32px rgba(76, 161, 175, 0.45);
+}
+
+.user-card.active {
+  border-color: #80cbc4;
+  box-shadow: 0 0 0 2px #80cbc4, 0 8px 32px rgba(128, 203, 196, 0.5);
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.user-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  object-fit: cover;
+}
+
+.user-card h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #e0f7fa;
+}
+
+.user-card .email {
+  font-size: 0.75rem;
+  color: rgba(224, 247, 250, 0.65);
+  word-break: break-all;
+}
+
+.badge {
+  margin-top: 0.25rem;
+  padding: 0.2rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  background: rgba(128, 203, 196, 0.25);
+  color: #b2dfdb;
+  border: 1px solid rgba(128, 203, 196, 0.4);
+}
+
+@media (max-width: 480px) {
+  .container { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; }
+  .user-card img { width: 64px; height: 64px; }
+}
